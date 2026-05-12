@@ -75,7 +75,6 @@ const addFee = async (req, res) => {
       dueDate,
       status: status || 'Pending'
     });
-
     const savedFee = await fee.save();
     res.status(201).json(savedFee);
   } catch (error) {
@@ -83,8 +82,17 @@ const addFee = async (req, res) => {
   }
 };
 
+// @desc    Refresh financial report (alias)
+// @route   GET /api/fees/report/refresh
+// @access  Public
+const refreshReport = async (req, res) => {
+  // Reuse the existing financial report logic
+  return getFinancialReport(req, res);
+};
+
 module.exports = {
   getFees,
   getFinancialReport,
-  addFee
+  addFee,
+  refreshReport
 };
